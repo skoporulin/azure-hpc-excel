@@ -91,7 +91,7 @@
     },
     "computeNodeNamePrefix": {
       "type": "string",
-      "defaultValue": "[parameters('clusterName')]",
+      "defaultValue": "hpc-",
       "minLength": 1,
       "maxLength": 12,      
       "metadata": {

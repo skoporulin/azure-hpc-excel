@@ -306,7 +306,7 @@ else
                  if($null -eq $restWebCert)
                  {
                      TraceInfo "Generating a self-signed certificate(CN=$PublicDnsName) for the HPC web service ..."
-                     $thumbprint = . $hpcBinPath\New-HpcCert.ps1 -SelfSigned
+                     $thumbprint = . $hpcBinPath\New-HpcCert.ps1 -MachineName $PublicDnsName -SelfSigned
                      TraceInfo "A self-signed certificate $thumbprint was created and installed"
                  }
                  else
