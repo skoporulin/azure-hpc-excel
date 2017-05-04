@@ -24,6 +24,13 @@
         "description": "Name of the virtual network to be used."
       }
     },
+    "subnetName":{
+      "type": "string",
+      "defaultValue": "default",
+      "metadata": {
+        "description": "Name of the subnet to be used."
+      }
+    },
     "headNodeVMSize": {
       "type": "string",
       "defaultValue": "Standard_D4_v2",
@@ -241,6 +248,11 @@
           "virtualNetworkName": {
             "value": "[variables('virtualNetworkName')]"
           },
+                    },
+          "subnetName": {
+            "value": "[parameters('subnetName')]"
+          },
+          
           "privateDomainName": {
             "value": "[parameters('privateDomainName')]"
           },
