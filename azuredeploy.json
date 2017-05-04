@@ -17,6 +17,13 @@
         "description": "The fully qualified domain name (FQDN) for the private domain forest which will be created by this template, for example 'hpc.local'."
       }
     },
+    "virtualNetworkName": {
+      "type": "string",
+      "defaultValue": "kop-hpc-vnet",
+      "metadata": {
+        "description": "Name of the virtual network to be used."
+      }
+    },
     "headNodeVMSize": {
       "type": "string",
       "defaultValue": "Standard_D4_v2",
@@ -73,7 +80,7 @@
     },
     "computeNodeImage": {
       "type": "string",
-      "defaultValue": "ComputeNode",
+      "defaultValue": "ComputeNodeWithExcel",
       "allowedValues": [
         "ComputeNode",
         "ComputeNodeWithExcel"
@@ -196,7 +203,7 @@
     }
   },
   "variables": {
-    "virtualNetworkName": "[concat(parameters('clusterName'), 'VNet')]",
+    "virtualNetworkName": "[parameters('virtualNetworkName')]",
     "storageAccountNamePrefix": "[toLower(concat('hpc', uniqueString(resourceGroup().id, toLower(parameters('clusterName')))))]",
     "storageAccountType": "Standard_LRS",
     "publicIPAddressName": "[concat(parameters('clusterName'), '-PublicIP-HN')]",
@@ -214,7 +221,7 @@
       }
     },
     "currentComputeNodeImage": "[variables('computeNodeImages')[parameters('computeNodeImage')]]",
-    "artifactsBaseUrl": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/create-hpc-cluster"
+    "artifactsBaseUrl": "https://raw.githubusercontent.com/skoporulin/azure-hpc-excel/master"
   },
   "resources": [
     {

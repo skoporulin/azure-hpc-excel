@@ -134,7 +134,7 @@
         },
         {
           "type": "Microsoft.Compute/virtualMachines/extensions",
-          "name": "[concat(parameters('vmName'),'/promoteDomainController')]",
+          "name": "[concat(parameters('vmName'),'/JoinAD')]",
           "apiVersion": "[parameters('apiVersion')]",
           "location": "[resourceGroup().location]",
           "dependsOn": [
@@ -148,9 +148,9 @@
             "autoUpgradeMinorVersion": true,
             "settings": {
               "configuration": {
-                "url": "[concat(parameters('scriptBaseUri'),'/CreateADPDC.ps1.zip')]",
-                "script": "CreateADPDC.ps1",
-                "function": "CreateADPDC"
+                "url": "[concat(parameters('scriptBaseUri'),'/JoinAD.ps1.zip')]",
+                "script": "JoinAD.ps1",
+                "function": "JoinAD"
               },
               "configurationArguments": {
                 "DomainName": "[parameters('privateDomainName')]"

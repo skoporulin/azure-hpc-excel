@@ -10,8 +10,9 @@
     },
     "virtualNetworkName": {
       "type": "string",
+      "defaultValue": "kop-hpc-vnet",
       "metadata": {
-        "description": "Name of the virtual network to be created. It must contain between 2 and 63 characters, start with a letter, end with a letter or number, and may contain only letters, numbers, underscores, periods, or hyphens."
+        "description": "Name of the virtual network to be used."
       }
     },
     "privateDomainName": {
@@ -182,7 +183,7 @@
     "hnStorageAccountName": "[concat(parameters('storageAccountNamePrefix'), padLeft(string(parameters('storageAccountStartIndex')), variables('storageAccountIndexWidth'), '0'))]",
     "hnStorageAccountId": "[resourceId('Microsoft.Storage/storageAccounts',variables('hnStorageAccountName'))]",
     "addressPrefix": "10.0.0.0/16",
-    "subnet1Name": "Subnet-1",
+    "subnet1Name": "default",
     "subnet1Prefix": "10.0.0.0/22",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnet1Name'))]",
@@ -237,27 +238,6 @@
       }
     },
     {
-      "apiVersion": "[variables('apiVersion')]",
-      "type": "Microsoft.Network/virtualNetworks",
-      "name": "[parameters('virtualNetworkName')]",
-      "location": "[resourceGroup().location]",
-      "properties": {
-        "addressSpace": {
-          "addressPrefixes": [
-            "[variables('addressPrefix')]"
-          ]
-        },
-        "subnets": [
-          {
-            "name": "[variables('subnet1Name')]",
-            "properties": {
-              "addressPrefix": "[variables('subnet1Prefix')]"
-            }
-          }
-        ]
-      }
-    },
-    {
       "name": "setupClusterPublicIP",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
@@ -300,8 +280,7 @@
           {
             "name": "IPConfig",
             "properties": {
-              "privateIPAllocationMethod": "Static",
-              "privateIPAddress": "10.0.0.4",
+              "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
                 "id": "[reference('setupClusterPublicIP').outputs.resourceId.value]"
               },
@@ -416,7 +395,7 @@
           },
           "DNSServerAddress": {
             "value": [
-              "10.0.0.4",
+              "10.1.3.4",
               "8.8.8.8"
             ]
           }
