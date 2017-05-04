@@ -248,7 +248,6 @@
           "virtualNetworkName": {
             "value": "[variables('virtualNetworkName')]"
           },
-                    },
           "subnet1Name": {
             "value": "[parameters('subnet1Name')]"
           },
