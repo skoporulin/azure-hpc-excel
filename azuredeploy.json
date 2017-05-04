@@ -24,7 +24,7 @@
         "description": "Name of the virtual network to be used."
       }
     },
-    "subnetName": {
+    "subnet1Name": {
       "type": "string",
       "defaultValue": "default",
       "metadata": {
@@ -249,8 +249,8 @@
             "value": "[variables('virtualNetworkName')]"
           },
                     },
-          "subnetName": {
-            "value": "[parameters('subnetName')]"
+          "subnet1Name": {
+            "value": "[parameters('subnet1Name')]"
           },
           
           "privateDomainName": {

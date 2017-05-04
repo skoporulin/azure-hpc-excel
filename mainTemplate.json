@@ -15,7 +15,7 @@
         "description": "Name of the virtual network to be used."
       }
     },
-    "subnetName": {
+    "subnet1Name": {
       "type": "string",
       "defaultValue": "default",
       "metadata": {
@@ -191,7 +191,7 @@
     "hnStorageAccountName": "[concat(parameters('storageAccountNamePrefix'), padLeft(string(parameters('storageAccountStartIndex')), variables('storageAccountIndexWidth'), '0'))]",
     "hnStorageAccountId": "[resourceId('Microsoft.Storage/storageAccounts',variables('hnStorageAccountName'))]",
     "addressPrefix": "10.0.0.0/16",
-    "subnet1Name": "[parameters('subnetName')]",
+    "subnet1Name": "[parameters('subnet1Name')]",
     "subnet1Prefix": "10.0.0.0/22",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworkName'))]",
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnet1Name'))]",
