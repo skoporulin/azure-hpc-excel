@@ -24,7 +24,7 @@
         "description": "Name of the virtual network to be used."
       }
     },
-    "subnetName":{
+    "subnetName": {
       "type": "string",
       "defaultValue": "default",
       "metadata": {
