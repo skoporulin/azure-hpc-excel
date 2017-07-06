@@ -1,8 +1,12 @@
 ﻿param
 (
     [Parameter(Mandatory=$true, ParameterSetName='NodePrepare')]
-    [String] $DomainFQDN, 
-        
+    [String] $DomainFQDN,
+
+    # Parameter help description
+    [Parameter(Mandatory=$true, ParameterSetName='NodePrepare')]
+    [String] $domainNetBios,
+       
     [Parameter(Mandatory=$true, ParameterSetName='NodePrepare')]
     [String] $AdminUserName,
 
@@ -105,7 +109,7 @@ else
         $acl.AddAccessRule($rule)
         $rule = New-Object System.Security.AccessControl.FileSystemAccessRule("Administrators","FullControl", "ContainerInherit, ObjectInherit", "None", "Allow")
         $acl.AddAccessRule($rule)
-        $domainNetBios = $DomainFQDN.Split('.')[0].ToUpper()
+        # $domainNetBios = $DomainFQDN.Split('.')[0].ToUpper()
         try
         {
             $rule = New-Object System.Security.AccessControl.FileSystemAccessRule("$domainNetBios\$AdminUserName","FullControl", "ContainerInherit, ObjectInherit", "None", "Allow")
