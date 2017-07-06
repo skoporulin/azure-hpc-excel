@@ -2,10 +2,6 @@
 (
     [Parameter(Mandatory=$true, ParameterSetName='NodePrepare')]
     [String] $DomainFQDN,
-
-    # Parameter help description
-    [Parameter(Mandatory=$true, ParameterSetName='NodePrepare')]
-    [String] $domainNetBios,
        
     [Parameter(Mandatory=$true, ParameterSetName='NodePrepare')]
     [String] $AdminUserName,
@@ -109,7 +105,7 @@ else
         $acl.AddAccessRule($rule)
         $rule = New-Object System.Security.AccessControl.FileSystemAccessRule("Administrators","FullControl", "ContainerInherit, ObjectInherit", "None", "Allow")
         $acl.AddAccessRule($rule)
-        # $domainNetBios = $DomainFQDN.Split('.')[0].ToUpper()
+        $domainNetBios = "$ENV:USERDOMAIN".ToUpper()
         try
         {
             $rule = New-Object System.Security.AccessControl.FileSystemAccessRule("$domainNetBios\$AdminUserName","FullControl", "ContainerInherit, ObjectInherit", "None", "Allow")
@@ -153,7 +149,7 @@ else
 
         Import-Module ScheduledTasks
         $AdminPassword = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($AdminBase64Password))
-        # $domainNetBios = $DomainFQDN.Split('.')[0].ToUpper()
+        $domainNetBios = "$ENV:USERDOMAIN".ToUpper()
         $domainUserCred = New-Object -TypeName System.Management.Automation.PSCredential `
                 -ArgumentList @("$domainNetBios\$AdminUserName", (ConvertTo-SecureString -String $AdminPassword -AsPlainText -Force))
 
