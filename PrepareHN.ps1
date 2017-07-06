@@ -153,7 +153,7 @@ else
 
         Import-Module ScheduledTasks
         $AdminPassword = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($AdminBase64Password))
-        $domainNetBios = $DomainFQDN.Split('.')[0].ToUpper()
+        # $domainNetBios = $DomainFQDN.Split('.')[0].ToUpper()
         $domainUserCred = New-Object -TypeName System.Management.Automation.PSCredential `
                 -ArgumentList @("$domainNetBios\$AdminUserName", (ConvertTo-SecureString -String $AdminPassword -AsPlainText -Force))
 

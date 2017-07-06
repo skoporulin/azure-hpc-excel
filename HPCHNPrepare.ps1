@@ -139,7 +139,7 @@ try
 
     if($RemoteDB.IsPresent)
     {
-        $domainNetbiosName = $computeInfo.Domain.Split(".")[0].ToUpper()
+        $domainNetbiosName = "SUEKCORP"
         $machineAccount = "$domainNetbiosName\$env:COMPUTERNAME$"
         Import-Module "sqlps" -DisableNameChecking -Force
         foreach($db in $DBDic.Keys)
